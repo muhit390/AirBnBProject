@@ -42,7 +42,7 @@ CREATE TABLE reviews (
     stars INTEGER CHECK (stars >= 1 AND stars <= 5) NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT unique_spot_user_review UNIQUE (spot_id, user_id)
+    CONSTRAINT uniqueSpotUserReview UNIQUE (spotId, userId)
 );
 
 CREATE TABLE reviewImages (
@@ -60,13 +60,13 @@ CREATE TABLE bookings (
     endDate DATE NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT unique_spot_user_booking UNIQUE (spot_id, user_id, start_date, end_date)
+    CONSTRAINT uniqueSpotUserBooking UNIQUE (spotId, userId, startDate, endDate)
 );
 
-CREATE INDEX idx_reviews_spot_id ON reviews(spot_id);
-CREATE INDEX idx_reviews_user_id ON reviews(user_id);
-CREATE INDEX idx_bookings_spot_id ON bookings(spot_id);
-CREATE INDEX idx_bookings_user_id ON bookings(user_id);
+CREATE INDEX idx_reviews_spotId ON reviews(spotId);
+CREATE INDEX idx_reviews_userId ON reviews(userId);
+CREATE INDEX idx_bookings_spotId ON bookings(spotId);
+CREATE INDEX idx_bookings_userId ON bookings(userId);
 
 CREATE INDEX idx_spots_lat ON spots(lat);
 CREATE INDEX idx_spots_lng ON spots(lng);
