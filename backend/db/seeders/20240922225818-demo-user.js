@@ -13,20 +13,12 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+  
     await User.bulkCreate([
       {
         email: 'demo@user.io',
         firstName: "demo",
-        lastName: "demo-lim",
+        lastName: "demolim",
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password')
       },
@@ -45,6 +37,7 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3')
       }
     ], { validate: true });
+    options;
   },
 
   async down (queryInterface, Sequelize) {
