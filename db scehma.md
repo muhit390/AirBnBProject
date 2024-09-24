@@ -1,6 +1,6 @@
 
 
-CREATE TABLE users (
+CREATE TABLE Users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE users (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE spots (
+CREATE TABLE Spots (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     ownerId INTEGER REFERENCES users(id) ON DELETE CASCADE,
     address VARCHAR(255) NOT NULL,
@@ -27,14 +27,14 @@ CREATE TABLE spots (
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE spotImages (
+CREATE TABLE SpotImages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     spotId INTEGER REFERENCES spots(id) ON DELETE CASCADE,
     url TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE reviews (
+CREATE TABLE Reviews (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     spotId INTEGER REFERENCES spots(id) ON DELETE CASCADE,
     userId INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -45,14 +45,14 @@ CREATE TABLE reviews (
     CONSTRAINT uniqueSpotUserReview UNIQUE (spotId, userId)
 );
 
-CREATE TABLE reviewImages (
+CREATE TABLE ReviewImages (
     id INTEGER PRIMARY KEY,
     reviewId INTEGER REFERENCES reviews(id) ON DELETE CASCADE,
     url TEXT NOT NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE bookings (
+CREATE TABLE Bookings (
     id INTEGER PRIMARY KEY,
     spotId INTEGER REFERENCES spots(id) ON DELETE CASCADE,
     userId INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -63,11 +63,12 @@ CREATE TABLE bookings (
     CONSTRAINT uniqueSpotUserBooking UNIQUE (spotId, userId, startDate, endDate)
 );
 
-CREATE INDEX idx_reviews_spotId ON reviews(spotId);
-CREATE INDEX idx_reviews_userId ON reviews(userId);
-CREATE INDEX idx_bookings_spotId ON bookings(spotId);
-CREATE INDEX idx_bookings_userId ON bookings(userId);
+CREATE INDEX idx_reviews_spotId ON Reviews(spotId);
+CREATE INDEX idx_reviews_userId ON Reviews(userId);
+CREATE INDEX idx_bookings_spotId ON Bookings(spotId);
+CREATE INDEX idx_bookings_userId ON Bookings(userId);
 
-CREATE INDEX idx_spots_lat ON spots(lat);
-CREATE INDEX idx_spots_lng ON spots(lng);
-CREATE INDEX idx_spots_price ON spots(price);
+CREATE INDEX idx_spots_lat ON Spots(lat);
+CREATE INDEX idx_spots_lng ON Spots(lng);
+CREATE INDEX idx_spots_price ON Spots(price);
+
