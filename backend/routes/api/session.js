@@ -13,7 +13,7 @@ router.post(
     '/',
     async(req, res, next) => {
         const { credential, password } = req.body;
-
+console.log("REQBODY====>", credential)
         const user = await User.unscoped().findOne({
             where: {
                 [Op.or]: {
@@ -33,6 +33,8 @@ router.post(
 
         const safeUser = {
             id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
             username: user.username,
         };
@@ -62,6 +64,8 @@ router.get(
         if (user) {
             const safeUser = {
                 id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 username: user.username,
             };
@@ -86,7 +90,7 @@ const validateLogin = [
       .withMessage('Please provide a password.'),
     handleValidationErrors
   ];
-
+/*
 // Log in
 router.post(
     '/',
@@ -113,6 +117,8 @@ router.post(
   
       const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };
@@ -125,7 +131,7 @@ router.post(
     }
   );
 
-
+*/
 
 
 
