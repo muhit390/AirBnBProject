@@ -11,10 +11,10 @@ const isProduction = environment === 'production';
 
 const app = express();
 
-app.use(morgan('dev'));
 // backend/app.js
 app.use(cookieParser());
 app.use(express.json());
+app.use(morgan('dev'));
 
 // Security Middleware
 if (!isProduction) {
@@ -34,11 +34,18 @@ app.use(
   csurf({
     cookie: {
       secure: isProduction,
-      sameSite: isProduction && "Lax",
+      sameSite: isProduction ? "Lax" : false,
       httpOnly: true
     }
   })
 );
+
+// Route to send CSRF token
+app.get('/api/csrf-token', (req, res) => {
+  res.json({ csrfToken: req.csrfToken() });
+});
+
+
 
 const routes = require('./routes');
 app.use(routes); // Connect all the routes
@@ -81,7 +88,16 @@ app.use((err, _req, res, _next) => {
 });
 
 
-
+app.use((err, _req, res, next) => {
+  if (err.code === 'EBADCSRFTOKEN') {
+    return res.status(403).json({
+      title: 'Invalid CSRF Token',
+      message: 'The CSRF token is invalid or has expired.',
+      errors: { message: 'Invalid CSRF token.' }
+    });
+  }
+  next(err);
+});
 
 
 
