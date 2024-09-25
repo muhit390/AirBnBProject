@@ -14,8 +14,10 @@ router.get("/api/csrf/restore", (req, res) => {
     });
 });
 
+// Import the api routes
 const apiRouter = require('./api');
 
+// Use the API routes
 router.use('/api', apiRouter);
 
 
@@ -35,3 +37,4 @@ router.post('/test', function (req, res) {
 
 
 module.exports = router;
+

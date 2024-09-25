@@ -6,6 +6,7 @@ const { User } = require('../../db/models');
 // Import session and users routers
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const reviewsRouter = require('./reviews.js');
 const spotsRouter = require('./spots.js')
 //const reviewsRouter = require('./reviews.js')
 
@@ -51,6 +52,7 @@ router.get('/require-auth', requireAuth, (req, res) => {
 // Use session and users routers
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/reviews', reviewsRouter);
 router.use('/spots', spotsRouter);
 //router.use('/reviews', reviewsRouter);
 module.exports = router;
