@@ -2,6 +2,7 @@ const express = require('express');
 const { Op } = require('sequelize');
 
 const { Spot } = require('../../db/models');
+const { SpotImage } = require('../../db/models')
 
 const router = express.Router();
 
@@ -10,12 +11,11 @@ router.get(
     '/',
     async (req, res) => {
         try {
-            console.log("YOU ARE HERE!!")
             let allSpots = await Spot.findAll();
             return res.json({ spots: allSpots })
         } catch (err) {
             console.error("Not work", err);
-            return res.status(500).json({ error: "An error ocurrrreed" })
+            return res.status(500).json({ error: "Internal Server Error" })
         }
     }
 )
@@ -25,7 +25,6 @@ router.get(
     '/current',
     async (req, res) => {
         const userId = req.user.id;
-console.log("YOU MADE IT")
         try {
             const spots = await Spot.findAll({
                 where: {
@@ -33,13 +32,13 @@ console.log("YOU MADE IT")
                 }
             })
             if (spots.length === 0) {
-                return res.status(404).json({ message: "No saved spots for current user" })
+                return res.status(404).json({ message: "Spots cannot be found" })
             }
 
             return res.status(200).json(spots)
         } catch (e) {
             console.error(e);
-            return res.status(500).json({ message: "Not Working, Fix" })
+            return res.status(500).json({ message: "Internal Server Error" })
         }
     }
 )
