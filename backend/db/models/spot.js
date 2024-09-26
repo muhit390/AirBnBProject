@@ -13,10 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Spot.belongsTo(models.User, {
         foreignKey: "ownerId",
-onDelete: "CASCADE"
-      })
+        onDelete: "CASCADE"
+      });
+
+      Spot.hasMany(models.SpotImage, {
+        foreignKey: "spotId",
+        onDelete: "CASCADE"
+      });
     }
   }
+  
   Spot.init({
     address: {
       type: DataTypes.STRING,
@@ -35,11 +41,11 @@ onDelete: "CASCADE"
       allowNull: false
     },
     lat: {
-      type: DataTypes.DECIMAL(9,6),
+      type: DataTypes.DECIMAL(9, 6),
       allowNull: false
     },
     lng: {
-      type: DataTypes.DECIMAL(9,6),
+      type: DataTypes.DECIMAL(9, 6),
       allowNull: false
     },
     name: {
@@ -52,7 +58,7 @@ onDelete: "CASCADE"
       allowNull: true
     },
     price: {
-      type: DataTypes.DECIMAL(10,2),
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       validate: {
         min: 0,
