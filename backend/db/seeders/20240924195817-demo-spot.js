@@ -18,7 +18,7 @@ module.exports = {
         city: "Los Angeles",
         state: "California",
         country: "U.S.A",
-        lat: 100.000000,
+        lat: 70.000000,
         lng: -100.000000,
         name: "Skateboard House",
         description: "i don't even skate but this is cool",
@@ -30,7 +30,7 @@ module.exports = {
         city: "Los Angeles",
         state: "California",
         country: "U.S.A",
-        lat: -100.000000,
+        lat: 70.000000,
         lng: 100.000000,
         name: "Skateboard Apartment",
         description: "i don't even skate but this is not cool",
@@ -42,7 +42,7 @@ module.exports = {
         city: "Los Angeles",
         state: "California",
         country: "U.S.A",
-        lat: -100.000000,
+        lat: -30.000000,
         lng: -100.000000,
         name: "Skateboard Condo",
         description: "i don't skate but this is coo not really lol jk again haha you owe me a soda",
@@ -57,6 +57,6 @@ module.exports = {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
       name: { [Op.in]: ['Skateboard House', 'Skateboard Apartment', 'Skateboard Condo'] }
-    }, {});
+    }, options);
   }
 };
