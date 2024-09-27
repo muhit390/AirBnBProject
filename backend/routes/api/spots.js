@@ -1,8 +1,7 @@
 const express = require('express');
 const { Op } = require('sequelize');
 
-const { Sequelize, Spot } = require('../../db/models');
-const { SpotImage } = require('../../db/models')
+const { Sequelize, Spot, SpotImage, Review } = require('../../db/models');
 
 const router = express.Router();
 
@@ -154,6 +153,25 @@ router.post(
         }
     }
 );
+
+// Create a Review for a Spot based on the Spot's id
+router.post('/:spotId/reviews', async(req, res) => {
+    const { review, stars } = req.body;
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        return res.status(404).json({ error: 'Spot not found' });
+    }
+
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review,
+        stars
+    });
+
+    return res.json({ review: newReview });
+});
 
 // Add an Image to a Spot based on the Spot's ID
 router.post(
