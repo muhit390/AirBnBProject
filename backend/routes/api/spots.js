@@ -1,10 +1,66 @@
 const express = require('express');
 const { Op } = require('sequelize');
 
-const { Spot } = require('../../db/models');
+const { Sequelize, Spot } = require('../../db/models');
 const { SpotImage } = require('../../db/models')
 
 const router = express.Router();
+
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
+
+
+const validateSpots = [
+    check('ownerId')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide spot ownerId.')
+        .isNumeric()
+        .withMessage('ownerId must be a number.'),
+    check('address')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 3 })
+        .withMessage('Please provide the address.'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the city.')
+        .isAlpha('en-US', { ignopre: ' ' })
+        .withMessage('City cannot contain numbers.'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the state.')
+        .isAlpha()
+        .withMessage('State cannot contain numbers.'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the country.')
+        .isAlpha()
+        .withMessage('Country cannot contain numbers.'),
+    check('lat')
+        .exists({ checkFalsy: true })
+        .isFloat()
+        .withMessage('Please provide a valid latitude.'),
+    check('lng')
+        .exists({ checkFalsy: true })
+        .isFloat()
+        .withMessage('Please provide a valid longitude.'),
+    check('name')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1 })
+        .withMessage('Please provide a name for this spot.'),
+    check('description')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5 })
+        .withMessage('Description must be at least 5 characters.'),
+    check('price')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 0 })
+        .withMessage('Price can not be empty.'),
+    handleValidationErrors
+];
+
 
 //Get all spots
 router.get(
@@ -14,7 +70,7 @@ router.get(
             let allSpots = await Spot.findAll();
             return res.json({ spots: allSpots })
         } catch (err) {
-            console.error("Not work", err);
+            console.error("Can't find spots", err);
             return res.status(500).json({ error: "Internal Server Error" })
         }
     }
@@ -66,6 +122,7 @@ router.get(
 // Create a Spot
 router.post(
     '/',
+    validateSpots,
     async (req, res) => {
         const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body;
         try {
@@ -83,8 +140,17 @@ router.post(
             });
             return res.status(201).json(newSpot);
         } catch (err) {
-            console.error("Error creating spot", err);
-            return res.status(500).json({ message: "An error occurred while creating the spot" });
+            if (err instanceof Sequelize.UniqueConstraintError) {
+                const errors = err.errors.map((e) => {
+                    if (e.path === 'name') {
+                        return 'Name must be unique.';
+                    } 
+                })
+                return res.status(400).json({ errors })
+            } else {
+                console.error("Error creating spot");
+                return res.status(500).json({ message: "An error occurred while creating the spot" });
+            }
         }
     }
 );

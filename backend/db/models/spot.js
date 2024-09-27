@@ -1,6 +1,6 @@
 'use strict';
 
-const { Model } = require('sequelize');
+const { Model, Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -21,41 +21,73 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE"
       });
     }
-  }
+  };
   
   Spot.init({
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true,
+      validate: {
+        len: [3, 200]
+      }
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        len: [2,100]
+      }
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        len: [2,100]
+      }
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isAlpha: true,
+        len: [2,100]
+      }
     },
     lat: {
       type: DataTypes.DECIMAL(9, 6),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+        min: -90,
+        max: 90
+      }
     },
     lng: {
       type: DataTypes.DECIMAL(9, 6),
-      allowNull: false
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+        min: -180,
+        max: 180
+      }
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      validate: {
+        len: [1, 100]
+      }
     },
     description: {
       type: DataTypes.TEXT(500),
-      allowNull: true
+      allowNull: true,
+      validate: {
+        len: [5, 500]
+      }
     },
     price: {
       type: DataTypes.DECIMAL(10, 2),
