@@ -21,7 +21,7 @@ router.get('/spot/:spotId', async(req, res) => {
     });
     return res.json({ reviews });
 });
-
+/*
 // Create a Review for a Spot based on the Spot's id
 router.post('/spot/:spotId', requireAuth, async(req, res) => {
     const { review, stars } = req.body;
@@ -40,7 +40,7 @@ router.post('/spot/:spotId', requireAuth, async(req, res) => {
 
     return res.json({ review: newReview });
 });
-
+*/
 // Add an Image to a Review based on the Review's id
 router.post('/:reviewId/images', requireAuth, async(req, res) => {
     const { url } = req.body;
