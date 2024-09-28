@@ -11,52 +11,52 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const validateSpots = [
     check('ownerId')
-    .exists({ checkFalsy: true })
-    .withMessage('Please provide spot ownerId.')
-    .isNumeric()
-    .withMessage('ownerId must be a number.'),
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide spot ownerId.')
+        .isNumeric()
+        .withMessage('ownerId must be a number.'),
     check('address')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 5 })
-    .withMessage('Please provide the address.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5 })
+        .withMessage('Please provide the address.'),
     check('city')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2 })
-    .withMessage('Please provide the city.')
-    .isAlpha('en-US', { ignopre: ' ' })
-    .withMessage('City cannot contain numbers.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the city.')
+        .isAlpha('en-US', { ignopre: ' ' })
+        .withMessage('City cannot contain numbers.'),
     check('state')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2 })
-    .withMessage('Please provide the state.')
-    .isAlpha()
-    .withMessage('State cannot contain numbers.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the state.')
+        .isAlpha()
+        .withMessage('State cannot contain numbers.'),
     check('country')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2 })
-    .withMessage('Please provide the country.')
-    .isAlpha()
-    .withMessage('Country cannot contain numbers.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 2 })
+        .withMessage('Please provide the country.')
+        .isAlpha()
+        .withMessage('Country cannot contain numbers.'),
     check('lat')
-    .exists({ checkFalsy: true })
-    .isFloat()
-    .withMessage('Please provide a valid latitude.'),
+        .exists({ checkFalsy: true })
+        .isFloat()
+        .withMessage('Please provide a valid latitude.'),
     check('lng')
-    .exists({ checkFalsy: true })
-    .isFloat()
-    .withMessage('Please provide a valid longitude.'),
+        .exists({ checkFalsy: true })
+        .isFloat()
+        .withMessage('Please provide a valid longitude.'),
     check('name')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 1 })
-    .withMessage('Please provide a name for this spot.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 1 })
+        .withMessage('Please provide a name for this spot.'),
     check('description')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 5 })
-    .withMessage('Description must be at least 5 characters.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 5 })
+        .withMessage('Description must be at least 5 characters.'),
     check('price')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 0 })
-    .withMessage('Price can not be empty.'),
+        .exists({ checkFalsy: true })
+        .isLength({ min: 0 })
+        .withMessage('Price can not be empty.'),
     handleValidationErrors
 ];
 
@@ -64,7 +64,7 @@ const validateSpots = [
 //Get all spots
 router.get(
     '/',
-    async(req, res) => {
+    async (req, res) => {
         try {
             let allSpots = await Spot.findAll();
             return res.json({ spots: allSpots })
@@ -78,7 +78,7 @@ router.get(
 //Get all Spots owned by the current user
 router.get(
     '/current',
-    async(req, res) => {
+    async (req, res) => {
         const userId = req.user.id;
         try {
             const spots = await Spot.findAll({
@@ -103,7 +103,7 @@ router.get(
 // Get details of a Spot from an ID
 router.get(
     '/:id',
-    async(req, res) => {
+    async (req, res) => {
         const spotId = req.params.id;
         try {
             const spot = await Spot.findByPk(spotId);
@@ -118,7 +118,7 @@ router.get(
     }
 );
 // Get all Reviews by a Spot's id
-router.get('/:id/reviews', async(req, res) => {
+router.get('/:id/reviews', async (req, res) => {
     const spotId = req.params.id;
     const reviews = await Review.findAll({
         where: { spotId },
@@ -128,7 +128,7 @@ router.get('/:id/reviews', async(req, res) => {
 });
 
 // Get all Reviews by a Spot's id
-router.get('/:id/reviews', async(req, res) => {
+router.get('/:id/reviews', async (req, res) => {
     const reviews = await Review.findAll({
         where: { id: req.params.id },
         include: [ReviewImage]
@@ -140,7 +140,7 @@ router.get('/:id/reviews', async(req, res) => {
 router.post(
     '/',
     validateSpots,
-    async(req, res) => {
+    async (req, res) => {
         const { ownerId, address, city, state, country, lat, lng, name, description, price } = req.body;
         try {
             const newSpot = await Spot.create({
@@ -173,7 +173,7 @@ router.post(
 );
 
 // Create a Review for a Spot based on the Spot's id
-router.post('/:id/reviews', async(req, res) => {
+router.post('/:id/reviews', async (req, res) => {
     const { review, stars } = req.body;
     const spotId = req.params.id;
     const userId = req.params.id;
@@ -196,7 +196,7 @@ router.post('/:id/reviews', async(req, res) => {
 // Add an Image to a Spot based on the Spot's ID
 router.post(
     '/:id/images',
-    async(req, res) => {
+    async (req, res) => {
         const spotId = req.params.id;
         const { url } = req.body;
 
@@ -227,7 +227,7 @@ router.post(
 // Edit a Spot
 router.put(
     '/:id',
-    async(req, res) => {
+    async (req, res) => {
         const spotId = req.params.id;
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
         try {
@@ -259,7 +259,7 @@ router.put(
 // Delete a Spot
 router.delete(
     '/:id',
-    async(req, res) => {
+    async (req, res) => {
         const spotId = req.params.id;
         try {
             const spot = await Spot.findByPk(spotId);
