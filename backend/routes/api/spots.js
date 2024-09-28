@@ -1,7 +1,7 @@
 const express = require('express');
 const { Op } = require('sequelize');
 
-const { Sequelize, Spot, SpotImage, Review } = require('../../db/models');
+const { Sequelize, Spot, SpotImage, Review, ReviewImage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -118,6 +118,15 @@ router.get(
     }
 );
 
+// Get all Reviews by a Spot's id
+router.get('/:id/reviews', async(req, res) => {
+    const reviews = await Review.findAll({
+        where: { id: req.params.id },
+        include: [ReviewImage]
+    });
+    return res.json({ reviews });
+});
+
 // Create a Spot
 router.post(
     '/',
@@ -155,7 +164,7 @@ router.post(
 );
 
 // Create a Review for a Spot based on the Spot's id
-router.post('/:spotId/reviews', async(req, res) => {
+router.post('/:id/reviews', async(req, res) => {
     const { review, stars } = req.body;
     const spot = await Spot.findByPk(req.params.spotId);
 
