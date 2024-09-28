@@ -12,16 +12,16 @@ router.get('/current', requireAuth, async(req, res) => {
     });
     return res.json({ reviews });
 });
-
-// // Get all Reviews by a Spot's id
-// router.get('/spot/:spotId', async(req, res) => {
-//     const reviews = await Review.findAll({
-//         where: { spotId: req.params.spotId },
-//         include: [ReviewImage]
-//     });
-//     return res.json({ reviews });
-// });
 /*
+// Get all Reviews by a Spot's id
+router.get('/spot/:spotId', async(req, res) => {
+    const reviews = await Review.findAll({
+        where: { spotId: req.params.spotId },
+        include: [ReviewImage]
+    });
+    return res.json({ reviews });
+});
+
 // Create a Review for a Spot based on the Spot's id
 router.post('/spot/:spotId', requireAuth, async(req, res) => {
     const { review, stars } = req.body;

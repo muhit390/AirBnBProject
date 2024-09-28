@@ -127,6 +127,15 @@ router.get('/:id/reviews', async(req, res) => {
     return res.json({ reviews });
 });
 
+// Get all Reviews by a Spot's id
+router.get('/:id/reviews', async(req, res) => {
+    const reviews = await Review.findAll({
+        where: { id: req.params.id },
+        include: [ReviewImage]
+    });
+    return res.json({ reviews });
+});
+
 // Create a Spot
 router.post(
     '/',
