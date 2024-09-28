@@ -45,13 +45,14 @@ router.post('/spot/:spotId', requireAuth, async(req, res) => {
 router.post('/:reviewId/images', requireAuth, async(req, res) => {
     const { url } = req.body;
     const review = await Review.findByPk(req.params.reviewId);
+    const reviewId = req.params.reviewId;
 
     if (!review) {
         return res.status(404).json({ error: 'Review not found' });
     }
 
     const reviewImage = await ReviewImage.create({
-        reviewId: req.params.reviewId,
+        reviewId,
         url
     });
 
