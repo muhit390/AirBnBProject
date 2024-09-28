@@ -14,7 +14,25 @@ router.get("/api/csrf/restore", (req, res) => {
     });
 });
 
-// Use the api router for all routes starting with /api
+
+// Use the API routes
 router.use('/api', apiRouter);
 
+
+// Keep this route to test frontend setup in Mod 5
+router.post('/test', function (req, res) {
+  res.json({ requestBody: req.body });
+});
+
+// ...
+
+
+
+
+
+
+
+
+
 module.exports = router;
+
