@@ -17,7 +17,7 @@ const validateSpots = [
     .withMessage('ownerId must be a number.'),
     check('address')
     .exists({ checkFalsy: true })
-    .isLength({ min: 3 })
+    .isLength({ min: 5 })
     .withMessage('Please provide the address.'),
     check('city')
     .exists({ checkFalsy: true })
@@ -119,8 +119,9 @@ router.get(
 );
 // Get all Reviews by a Spot's id
 router.get('/:id/reviews', async(req, res) => {
+    const spotId = req.params.id;
     const reviews = await Review.findAll({
-        where: { id: req.params.id },
+        where: { spotId },
         include: [ReviewImage]
     });
     return res.json({ reviews });
@@ -165,15 +166,17 @@ router.post(
 // Create a Review for a Spot based on the Spot's id
 router.post('/:id/reviews', async(req, res) => {
     const { review, stars } = req.body;
-    const spot = await Spot.findByPk(req.params.spotId);
+    const spotId = req.params.id;
+    const userId = req.params.id;
+    const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
         return res.status(404).json({ error: 'Spot not found' });
     }
 
     const newReview = await Review.create({
-        userId: req.user.id,
-        spotId: req.params.spotId,
+        userId,
+        spotId,
         review,
         stars
     });
@@ -187,6 +190,11 @@ router.post(
     async(req, res) => {
         const spotId = req.params.id;
         const { url } = req.body;
+
+        if (!url) {
+            return res.status(400).json({ message: "Invalid image URL" });
+        }
+
         try {
             // Check if the spot exists
             const spot = await Spot.findByPk(spotId);
