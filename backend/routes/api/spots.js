@@ -18,25 +18,31 @@ const validateSpots = [
     check('address')
         .exists({ checkFalsy: true })
         .isLength({ min: 5 })
-        .withMessage('Please provide the address.'),
+        .withMessage('Please provide the address.')
+        .custom(async (value) => {
+            const spot = await Spot.findOne({ where: { address: value } });
+            if (spot) {
+                throw new Error('Address must be unique.');
+            }
+        }),
     check('city')
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Please provide the city.')
         .isAlpha('en-US', { ignopre: ' ' })
-        .withMessage('City cannot contain numbers.'),
+        .withMessage('City cannot contain numbers or special characters.'),
     check('state')
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Please provide the state.')
         .isAlpha()
-        .withMessage('State cannot contain numbers.'),
+        .withMessage('State cannot contain numbers or special characters.'),
     check('country')
         .exists({ checkFalsy: true })
         .isLength({ min: 2 })
         .withMessage('Please provide the country.')
         .isAlpha()
-        .withMessage('Country cannot contain numbers.'),
+        .withMessage('Country cannot contain numbers or special characters.'),
     check('lat')
         .exists({ checkFalsy: true })
         .isFloat()
@@ -48,7 +54,13 @@ const validateSpots = [
     check('name')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('Please provide a name for this spot.'),
+        .withMessage('Please provide a name for this spot.')
+        .custom(async (value) => {
+            const spot = await Spot.findOne({ where: { address: value } });
+            if (spot) {
+                throw new Error('Address must be unique.');
+            }
+        }),
     check('description')
         .exists({ checkFalsy: true })
         .isLength({ min: 5 })
@@ -66,13 +78,53 @@ router.get(
     '/',
     async (req, res) => {
         try {
-            let allSpots = await Spot.findAll();
-            return res.json({ spots: allSpots })
-        } catch (err) {
-            console.error("Can't find spots", err);
-            return res.status(500).json({ error: "Internal Server Error" })
+            let { page, size, city, price, ownerId } = req.query;
+            page = parseInt(page) || 1;
+            size = parseInt(size) || 10;
+
+            if (page < 1) page = 1;
+            if (size < 1) size = 1;
+
+            const limit = size;
+            const offset = (page - 1) * size;
+
+            //query filters
+            const where = {};
+            //Filter bu city
+            if (city) {
+                where.city = city
+            }
+            // Filter by price (less than or equal)
+            if (price) {
+                where.price = {
+                    [Sequelize.Op.lte]: parseFloat(price),
+                };
+            }
+                // Filter by ownerId
+                if (ownerId) {
+                    where.ownerId = ownerId;
+                }
+                //query filter end
+
+                let allSpots = await Spot.findAndCountAll({
+                    where,
+                    limit,
+                    offset
+                });
+
+                const totalSpots = await Spot.count({ where });
+
+                return res.json({
+                    spots: allSpots.rows,
+                    page,
+                    size,
+                    totalSpots
+                });
+            } catch (err) {
+                console.error("Can't find spots", err);
+                return res.status(500).json({ error: "Internal Server Error" })
+            }
         }
-    }
 )
 
 //Get all Spots owned by the current user
@@ -226,9 +278,9 @@ router.post(
 
 // Edit a Spot
 router.put(
-    '/:id',
+    '/:spotId',
     async (req, res) => {
-        const spotId = parseInt(req.params.id, 10);
+        const spotId = req.params.spotId;
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
         try {
             const spot = await Spot.findByPk(spotId);

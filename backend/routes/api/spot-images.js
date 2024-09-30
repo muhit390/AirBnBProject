@@ -25,9 +25,9 @@ router.get('/:imageId', async (req, res) => {
 
 // Create an Image for a Spot based on the spotId
 router.post('/:spotId', async (req, res) => {
-    const { spotId } = req.params;
+    const spotId = parseInt(req.params.spotId, 10);
     const { url } = req.body;
-
+   
     if (!url) {
         return res.status(400).json({ message: "Invalid image URL" });
     }
