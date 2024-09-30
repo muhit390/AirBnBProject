@@ -104,7 +104,7 @@ router.get(
 router.get(
     '/:id',
     async (req, res) => {
-        const spotId = req.params.id;
+        const spotId = parseInt(req.params.id, 10);
         try {
             const spot = await Spot.findByPk(spotId);
             if (!spot) {
@@ -119,7 +119,7 @@ router.get(
 );
 // Get all Reviews by a Spot's id
 router.get('/:id/reviews', async (req, res) => {
-    const spotId = req.params.id;
+    const spotId = parseInt(req.params.id, 10);
     const reviews = await Review.findAll({
         where: { spotId },
         include: [ReviewImage]
@@ -175,8 +175,8 @@ router.post(
 // Create a Review for a Spot based on the Spot's id
 router.post('/:id/reviews', async (req, res) => {
     const { review, stars } = req.body;
-    const spotId = req.params.id;
-    const userId = req.params.id;
+    const spotId = parseInt(req.params.id, 10);
+    const userId = req.user.id;
     const spot = await Spot.findByPk(spotId);
 
     if (!spot) {
@@ -197,7 +197,7 @@ router.post('/:id/reviews', async (req, res) => {
 router.post(
     '/:id/images',
     async (req, res) => {
-        const spotId = req.params.id;
+        const spotId = parseInt(req.params.id, 10);
         const { url } = req.body;
 
         if (!url) {
@@ -228,7 +228,7 @@ router.post(
 router.put(
     '/:id',
     async (req, res) => {
-        const spotId = req.params.id;
+        const spotId = parseInt(req.params.id, 10);
         const { address, city, state, country, lat, lng, name, description, price } = req.body;
         try {
             const spot = await Spot.findByPk(spotId);
@@ -260,7 +260,7 @@ router.put(
 router.delete(
     '/:id',
     async (req, res) => {
-        const spotId = req.params.id;
+        const spotId = parseInt(req.params.id, 10);
         try {
             const spot = await Spot.findByPk(spotId);
             if (!spot) {

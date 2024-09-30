@@ -7,8 +7,8 @@ const { User } = require('../../db/models');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const reviewsRouter = require('./reviews.js');
-const spotsRouter = require('./spots.js')
-const spotImagesRouter = require('./spot-images.js')
+const spotsRouter = require('./spots.js');
+const spotImagesRouter = require('./spot-images.js');
 
 // Test route (you can keep this or remove if no longer needed)
 router.post('/test', function(req, res) {
