@@ -62,7 +62,6 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/spots', spotRouter);
 router.use('/reviews', reviewRouter);
-router.use('/bookings', bookingRouter);
 router.use('/spot-images', spotImagesRouter);
 router.use('/review-images', reviewImagesRouter);
 
