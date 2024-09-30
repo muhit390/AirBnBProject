@@ -2,7 +2,6 @@
 const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
-const bookingRouter = require('./bookings.js');
 const spotRouter = require('./spots.js');
 const reviewRouter = require('./reviews.js');
 const reviewImagesRouter = require('./review-images.js');
