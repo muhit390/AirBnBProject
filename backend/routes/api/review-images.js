@@ -5,32 +5,35 @@ const { ReviewImage } = require('../../db/models');
 
 const router = express.Router();
 
-// DELETE a review image by its ID
-router.delete('/:imageId', requireAuth, async(req, res, next) => {
-    const { imageId } = req.params;
+router.delete('/:imageId', requireAuth, async (req, res, next) => {
+    const imageId = req.params.imageId;
+    const userId = req.user.id;
+        // Fine the review image by imageId
+        const reviewImage = await ReviewImage.findByPk(imageId, {
+            include: {
+                model: Review,
 
-    try {
-        // Find the review image by its ID
-        const reviewImage = await ReviewImage.findByPk(imageId);
-
-        // If the review image doesn't exist, return a 404 error
+            },
+        });
+        // If the review image doesnt exist, return 404 error
         if (!reviewImage) {
             return res.status(404).json({
                 message: "Review Image couldn't be found"
             });
         }
+        if (reviewImage.Review.userId !== userId) {
+            return res.status(403).json({
+                message: "Forbidden: Review Image does not belong to current user",
+              });
+        }
 
-        // Delete the review image
         await reviewImage.destroy();
 
-        // Return a success response
         return res.status(200).json({
             message: "Successfully deleted"
         });
 
-    } catch (error) {
-        next(error);
-    }
 });
+
 
 module.exports = router;
