@@ -461,7 +461,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
 
   try {
     const spot = await Spot.findByPk(spotId);
-
+    // console.log("SPOTID ====> " , spotId)
     if (!spot) {
       return res.status(404).json({ message: "Spot couldn't be found" });
     }
