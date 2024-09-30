@@ -230,7 +230,7 @@ router.post('/:id/reviews', async (req, res) => {
     const spotId = parseInt(req.params.id, 10);
     const userId = req.user.id;
     const spot = await Spot.findByPk(spotId);
-
+    // console.log("SPOTID ====> " , spotId)
     if (!spot) {
         return res.status(404).json({ error: 'Spot not found' });
     }
