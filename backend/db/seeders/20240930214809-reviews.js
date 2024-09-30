@@ -12,63 +12,63 @@ const reviews = [
   {
     "userId": 1,
     "spotId": 2,
-    "review": "The house was beautiful! It was very clean and tidy upon arrival. ",
+    "review": "Very nice",
     "stars": 5,
     
   },
   {
     "userId": 1,
     "spotId": 3,
-    "review": "The house was huge and right on the beach. The owner provided all the beach chairs, umbrellas, and toys for the kids, which was a great added little touch! Will be rebooking!",
+    "review": "i come again",
     "stars": 5,
 
   }, 
   {
     "userId": 1,
     "spotId": 5,
-    "review": "This was in walking distance to central park. Beautiful neighborhood and plenrt of public transportation that was very close ro house.",
+    "review": "could be better",
     "stars": 4,
     
   },
   {
     "userId": 2 ,
     "spotId": 5,
-    "review": "Cozy and convenient, but a bit noisy",
+    "review": "its aight",
     "stars": 4,
 
   },
 {
     "userId": 2 ,
     "spotId": 1,
-    "review": "Quiet and relaxing place to write code",
+    "review": "good",
     "stars": 4,
 
   },
 {
     "userId": 2 ,
     "spotId": 4,
-    "review": "Amazing view and scenery of the mountains!",
+    "review": "review",
     "stars": 4,
 
   },
   {
     "userId": 3 ,
     "spotId": 1,
-    "review": "Small and nice place to sit down and study",
+    "review": "review",
     "stars": 5,
 
   },
 {
     "userId": 3,
     "spotId": 2,
-    "review": "Nice and clean area",
+    "review": "review",
     "stars": 5,
 
   },
 {
     "userId": 3,
     "spotId": 4,
-    "review": "The place was clean and tidy when walking in",
+    "review": "review",
     "stars": 4,
 
   }

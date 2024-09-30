@@ -9,27 +9,27 @@ if (process.env.NODE_ENV === 'production') {
 const demoSpotImages =
 [ 
   { spotId: 1, images: [
-      { url: "livingroom1.png", preview: true },
-      { url: "kitchen1.png" },
-      { url: "diningroom1.png" }
+      { url: "img.png", preview: true },
+      { url: "img.png" },
+      { url: "img.png" }
   ]},
   { spotId: 2, images: [
-      { url: "bathroom1.png", preview: true },
-      { url: "bedroom1.png" },
-      { url: "garden1.png" }
+      { url: "img.png", preview: true },
+      { url: "img.png" },
+      { url: "img.png" }
   ]},
   { spotId: 3, images: [
-      { url: "kitchen2.png", preview: true },
-      { url: "patio1.png" }
+      { url: "img.png", preview: true },
+      { url: "img.png" }
   ]},
   { spotId: 4, images: [
-      { url: "livingroom2.png", preview: true },
-      { url: "balcony1.png" },
-      { url: "office1.png" },
-      { url: "garage1.png" }
+      { url: "img.png", preview: true },
+      { url: "img.png" },
+      { url: "img.png" },
+      { url: "img.png" }
   ]},
   { spotId: 5, images: [
-      { url: "bedroom2.png", preview: true }
+      { url: "img.png", preview: true }
   ]}
 ];
 
