@@ -1,10 +1,20 @@
 const express = require('express');
-const { requireAuth } = require('../../utils/auth');
-const { Review, Spot, ReviewImage } = require('../../db/models');
-
 const router = express.Router();
+const { Spot, Review, User, ReviewImage } = require('../../db/models');
+const review = require('../../db/models/review');
+const { literal } = require('sequelize');
+const { requireAuth } = require('../../utils/auth.js');
 
-// Get all reviews of the current user
+const authorization = async (req,res, next) => {
+    if (!req.user) {
+        return res.status(403).json({
+            message: "Authorization required"
+        });
+    }  
+    next()
+};
+
+// Get all reviews of the current user (get all reviews made by current user)
 router.get('/current',requireAuth, async (req, res) => {
     if (req.user) {
         const schema = process.env.NODE_ENV === 'production' ? `"${process.env.SCHEMA}".` : '';
@@ -69,23 +79,45 @@ router.get('/',requireAuth, async (req, res) => {
     res.json(allReviews)
 });
 
-// Add an Image to a Review based on the Review's id
-router.post('/:reviewId/images', requireAuth, async(req, res) => {
+
+
+// Add an image to a Review based on the Review's id 
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+    const userId = req.user.id;
+    const reviewId = req.params.reviewId;
     const { url } = req.body;
-    const review = await Review.findByPk(req.params.reviewId);
-    const reviewId = parseInt(req.params.reviewId, 10);
-
+    const review = await Review.findByPk(reviewId);
     if (!review) {
-        return res.status(404).json({ message: "Review couldn't be found" });
+        return res.status(404).json({
+            message: "Review couldn't be found",
+        });
     }
-
-    const reviewImage = await ReviewImage.create({
-        reviewId,
-        url
+    if (review.userId !== userId) {
+        return res.status(403).json({
+            message: 'Unauthorized',
+        });
+    }
+    const imageCount = await ReviewImage.count({
+        where: {
+            reviewId,
+        },
     });
-
-    return res.status(201).json({ image: reviewImage });
+    if (imageCount >= 10) {
+        return res.status(403).json({
+            message: 'Maximum number of images for this resource was reached',
+        });
+    }
+    const newImage = await ReviewImage.create({
+        reviewId,
+        url,
+    });
+    return res.status(201).json({
+        id: newImage.id,
+        url: newImage.url,
+    });
 });
+
+
 
 // Edit a Review
 router.put('/:reviewId', requireAuth, async (req, res) => {
@@ -131,6 +163,7 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     });
 });
 
+
 // Delete a review
 router.delete('/:reviewId',requireAuth, async (req, res) => {
     if (!req.user) {
@@ -156,6 +189,7 @@ router.delete('/:reviewId',requireAuth, async (req, res) => {
         message: 'Successfully deleted'
     });
 })
+
 
 
 module.exports = router;

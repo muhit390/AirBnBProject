@@ -6,7 +6,32 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 }
-
+const demoSpotImages =
+[ 
+  { spotId: 1, images: [
+      { url: "livingroom1.png", preview: true },
+      { url: "kitchen1.png" },
+      { url: "diningroom1.png" }
+  ]},
+  { spotId: 2, images: [
+      { url: "bathroom1.png", preview: true },
+      { url: "bedroom1.png" },
+      { url: "garden1.png" }
+  ]},
+  { spotId: 3, images: [
+      { url: "kitchen2.png", preview: true },
+      { url: "patio1.png" }
+  ]},
+  { spotId: 4, images: [
+      { url: "livingroom2.png", preview: true },
+      { url: "balcony1.png" },
+      { url: "office1.png" },
+      { url: "garage1.png" }
+  ]},
+  { spotId: 5, images: [
+      { url: "bedroom2.png", preview: true }
+  ]}
+];
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -20,21 +45,15 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    await queryInterface.bulkInsert('SpotImages', [
-      {
-        spotId: 1,
-        url: "https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-      },
-      {
-        spotId: 2,
-        url: "https://www.livehome3d.com/assets/img/articles/design-house/how-to-design-a-house.jpg"
-      },
-      {
-        spotId: 3,
-        url: "https://www.houseplans.net/news/wp-content/uploads/2023/07/57260-768.jpeg"
+    for (const spotImages of demoSpotImages) {
+      for (const image of spotImages.images) {
+        SpotImage.create({
+          spotId: spotImages.spotId,
+          url: image.url,
+          preview: image.preview || false
+        });
       }
-    ], {});
-    options;
+    }
   },
 
   async down (queryInterface, Sequelize) {
@@ -44,10 +63,16 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    options.tableName = 'SpotImages';
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
-    }, options);
+    for (const spotImages of demoSpotImages) {
+      for (const image of spotImages.images) {
+        SpotImage.destroy({
+          where: {
+            spotId: spotImages.spotId,
+            url: image.url,
+            preview: image.preview || false
+          }
+        });
+      }
+    }
   }
 };
