@@ -8,12 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Spot has many Bookings
-      Spot.hasMany(models.Booking, {
-        foreignKey: 'spotId',
-        onDelete: 'CASCADE',
-        hooks: true,
-      });
       // Spot has many Reviews
       Spot.hasMany(models.Review, {
         foreignKey: 'spotId', 
