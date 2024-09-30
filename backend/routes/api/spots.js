@@ -334,7 +334,7 @@ router.get('/:spotId/reviews', async (req, res, next) => {
   });
 
 // Create a spot 
-router.post('/', requireAuth, validateSpot, async (req, res) => {
+router.post('/', requireAuth, validateSpots, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const ownerId = req.user.id;
 
