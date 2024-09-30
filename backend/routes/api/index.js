@@ -9,7 +9,7 @@ const usersRouter = require('./users.js');
 const reviewsRouter = require('./reviews.js');
 const spotsRouter = require('./spots.js');
 const reviewImagesRouter = require('./review-images.js');
-//const reviewsRouter = require('./reviews.js')
+const spotImagesRouter = require('./spot-images.js');
 
 // Test route (you can keep this or remove if no longer needed)
 router.post('/test', function(req, res) {
@@ -56,5 +56,6 @@ router.use('/users', usersRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/spots', spotsRouter);
 router.use('/review-images', reviewImagesRouter);
-//router.use('/reviews', reviewsRouter);
+router.use('/spot-images', spotImagesRouter);
+
 module.exports = router;
