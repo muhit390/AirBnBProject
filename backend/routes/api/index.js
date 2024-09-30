@@ -7,7 +7,8 @@ const { User } = require('../../db/models');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const reviewsRouter = require('./reviews.js');
-const spotsRouter = require('./spots.js')
+const spotsRouter = require('./spots.js');
+const reviewImagesRouter = require('./review-images.js');
 //const reviewsRouter = require('./reviews.js')
 
 // Test route (you can keep this or remove if no longer needed)
@@ -54,5 +55,6 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/reviews', reviewsRouter);
 router.use('/spots', spotsRouter);
+router.use('/review-images', reviewImagesRouter);
 //router.use('/reviews', reviewsRouter);
 module.exports = router;

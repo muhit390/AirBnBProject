@@ -175,10 +175,10 @@ router.post(
 // Create a Review for a Spot based on the Spot's id
 router.post('/:id/reviews', async(req, res) => {
     const { review, stars } = req.body;
-    const spotId = req.params.id;
-    const userId = req.params.id;
+    const spotId = parseInt(req.params.id, 10);
+    const userId = req.user.id;
     const spot = await Spot.findByPk(spotId);
-
+    // console.log("SPOTID ====> " , spotId)
     if (!spot) {
         return res.status(404).json({ error: 'Spot not found' });
     }
