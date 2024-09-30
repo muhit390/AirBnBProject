@@ -7,7 +7,6 @@ const csurf = require('csurf');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const sessionRouter = require('../backend/routes/api/session.js');
-const bookingRouter = require('../backend/routes/api/bookings.js');
 const reviewRouter = require('../backend/routes/api/reviews.js');
 const spotRouter = require('../backend/routes/api/spots.js');
 const userRouter = require('../backend/routes/api/users.js');
