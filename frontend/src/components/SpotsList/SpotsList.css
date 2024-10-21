@@ -1,72 +1,164 @@
+/* Spots list container */
 .spots-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     padding: 20px;
+    justify-content: center; /* Center items on all screen sizes */
 }
 
+/* Main container */
 .container {
-    max-width: 2300px;
-    /* display: flex; */
-    justify-content: space-between;
-    align-items: center;
+    max-width: 2000px; /* Set a max width to make it look good on larger screens */
     margin: 0 auto;
     padding: 10px 20px;
     color: #5a5a5a;
 }
 
 .container h1 {
-    font-size: 50px;
+    font-size: 40px; /* Adjusted font size for better scalability */
     text-align: center;
-    margin-top: 150px;
+    margin-top: 100px; /* Reduced top margin for mobile responsiveness */
 }
 
+/* Individual spot tile */
 .spot-tile {
     border: 0px solid #ddd;
     padding: 20px;
-    width: 300px;
+    width: 100%; /* Ensure full width on smaller screens */
+    max-width: 300px; /* Set a max width for larger screens */
     cursor: pointer;
     text-align: center;
     transition: box-shadow 0.3s;
     margin-top: 40px;
     border-radius: 5%;
+    background-color: #fff; /* Add background color to make it stand out */
 }
-.spot-name{
+
+.spot-name {
     margin-top: 5px;
     margin-bottom: 15px;
-
+    font-size: 1.2rem; /* Increase font size for better readability */
 }
 
-
+/* Hover effect for spot tile */
 .spot-tile:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Image styles */
 .spot-tile img {
     width: 100%;
-    height: 250px;
+    height: 200px;
     object-fit: cover;
     border-radius: 5%;
 }
 
+/* Spot location text */
 .spot-location {
-
     margin-top: 10px;
     font-weight: bold;
+    font-size: 1rem;
 }
-.star-icon{
+
+/* Star icon styling */
+.star-icon {
     margin-left: 10px;
     color: #ff5a5f;
     margin-right: 2px;
 }
 
+/* Spot rating text */
 .spot-rating {
     margin-top: 5px;
     color: #ff5a5f;
+    font-size: 1rem;
 }
 
+/* Spot price text */
 .spot-price {
     margin-top: 5px;
     font-weight: bold;
     color: #5a5a5a;
+    font-size: 1.1rem; /* Adjust font size for readability */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
+    .container h1 {
+        font-size: 36px; /* Adjust heading size for tablets */
+    }
+
+    .spot-tile {
+        width: 45%; /* Display two tiles per row on medium screens */
+        max-width: 45%;
+    }
+
+    .spot-tile img {
+        height: 180px; /* Adjust image height for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 1000px; /* Set a max width to make it look good on larger screens */
+        margin: 0 auto;
+        padding: 10px 20px;
+        color: #5a5a5a;
+    }
+    .container h1 {
+        font-size: 25px; /* Adjust heading size for smaller screens */
+        margin-top: 120px; /* Reduce top margin for mobile devices */
+    }
+
+    .spot-tile {
+        width: 90%; /* Display one tile per row on smaller screens */
+        max-width: 90%;
+        margin: 10px auto; /* Add margin to center tiles on smaller screens */
+    }
+
+    .spot-tile img {
+        height: 160px; /* Adjust image height for smaller devices */
+    }
+
+    .spot-name {
+        font-size: 1.1rem; /* Adjust font size for mobile */
+    }
+
+    .spot-location {
+        font-size: 0.9rem; /* Adjust font size for mobile */
+    }
+
+    .spot-price {
+        font-size: 1rem; /* Adjust font size for mobile */
+    }
+}
+
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+    .container h1 {
+        margin-top: 100px;
+        font-size: 20px; /* Adjust heading size for extra small screens */
+    }
+
+    .spot-tile {
+        width: 100%; /* Full width for spot tiles on very small screens */
+        margin-top: 20px;
+    }
+
+    .spot-tile img {
+        height: 140px; /* Adjust image height for extra small devices */
+    }
+
+    .spot-name {
+        font-size: 1rem; /* Adjust font size for extra small devices */
+    }
+
+    .spot-location {
+        font-size: 0.85rem; /* Adjust font size for extra small devices */
+    }
+
+    .spot-price {
+        font-size: 0.95rem; /* Adjust font size for extra small devices */
+    }
 }

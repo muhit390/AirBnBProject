@@ -10,7 +10,6 @@ li {
     padding: 10px;
 }
 
-
 /* Profile Dropdown Menu */
 
 .profile-dropdown {
@@ -41,7 +40,6 @@ li {
     transition: 0.3s;
 }
 
-
 /* Header container */
 
 .app-header {
@@ -53,7 +51,6 @@ li {
     left: 0;
     z-index: 1000;
 }
-
 
 /* Flexbox for layout */
 
@@ -68,20 +65,24 @@ li {
 }
 
 .header-content button {
-    padding: 10px 30px;
+    padding: 10px 20px;
     background-color: white;
     border: 1px solid #ccc;
-    border-radius: 20px;
-    color: #ccc;
+    border-radius: 100px;
+    color: rgb(122, 122, 122);
     font-size: 20px;
 }
 
 .header-content button:hover {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
 }
 
-
 /* Logo styles */
+
+.logo {
+    margin-right: auto; /* Ensure the logo stays on the left side */
+}
 
 .logo img {
     height: 70px;
@@ -89,13 +90,11 @@ li {
     cursor: pointer;
 }
 
-
 /* Auth/user buttons */
 
 .auth-buttons {
     display: flex;
     gap: 15px;
-
 }
 
 .auth-button {
@@ -106,10 +105,8 @@ li {
 
 .auth-button:hover {
     color: #ff385c;
-    /* Change to your preferred hover color */
     cursor: pointer;
 }
-
 
 /* Navigation links container */
 
@@ -117,17 +114,12 @@ li {
     display: flex;
     align-items: center;
     gap: 15px;
-
-
-
 }
-
 
 /* Create a New Spot button */
 
 .create-spot-button {
     background-color: #ff385c;
-    /* Airbnb's signature red */
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
@@ -138,50 +130,45 @@ li {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
     cursor: pointer;
-    margin-left: 1000px;
+    margin-right: 20px;
 }
-
 
 /* Hover and active states for the button */
 
 .create-spot-button:hover {
     background-color: #e63950;
-    /* Slightly darker on hover */
-    /* transform: translateY(-2px); */
-    /* Lifts the button slightly */
 }
 
 .create-spot-button:active {
     transform: translateY(0);
-    /* Returns the button to original position on click */
     background-color: #d32f45;
-    /* Darker background on active click */
 }
+
+/* Manage spots and logout buttons */
 
 .manage-spots-link {
     padding: 10px;
     margin: 5px 0;
-  }
+}
 
-  .manage-spots-link a {
+.manage-spots-link a {
     color: #333;
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
     transition: color 0.3s ease;
-  }
+}
 
-  .manage-spots-link a:hover {
-    color: #ff385c; /* Example hover color */
-  }
+.manage-spots-link a:hover {
+    color: #ff385c;
+}
 
-
-  .logout-button {
+.logout-button {
     padding: 10px;
     margin: 5px 0;
-  }
+}
 
-  .logout-button button {
+.logout-button button {
     padding: 10px 20px;
     background-color: #ff385c;
     color: white;
@@ -191,31 +178,150 @@ li {
     font-size: 1rem;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-  }
+}
 
-  .logout-button button:hover {
+.logout-button button:hover {
     background-color: #e63950;
+}
 
-  }
-
-  .logout-button button:active {
+.logout-button button:active {
     background-color: #d32f45;
     transform: translateY(1px);
-  }
-
-
-
+}
 
 /* Responsive adjustments */
+@media (max-width: 1440px) {
+    .profile-dropdown {
+        position: absolute;
+        margin-top: 50px;
+        margin-left: -110px;
 
-@media (max-width: 768px) {
+    }
+}
+
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
     .header-content {
         padding: 10px;
+        display: flex;
+        justify-content: space-between;
     }
-    .auth-buttons {
-        gap: 10px;
+    .profile-dropdown {
+        position: absolute;
+        margin-top: 50px;
+        margin-left: -110px;
+
     }
+    .header-content button {
+
+        font-size: 18px;
+    }
+
+    .create-spot-button {
+        margin-left: auto;
+        margin-right: 20px;
+    }
+
+
     .logo img {
-        height: 40px;
+        height: 90px; /* Slightly smaller logo */
+    }
+}
+
+/* Small screens (phones) */
+@media (max-width: 768px) {
+    .header-content {
+       display: flex;
+        align-items: flex-start;
+    }
+    .profile-dropdown {
+        position: absolute;
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+    .header-content button {
+
+        font-size: 15px;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .create-spot-button {
+        padding: 10px 15px;
+        font-size: 0.8rem;
+        width: 80%;
+        text-align: center;
+        margin-left: 100px;
+    }
+
+    .logo img {
+        height: 70px; /* Smaller logo for small screens */
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .logout-button button {
+        width: 100%;
+        text-align: center;
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .header-content {
+        padding: 5px;
+        display: flex;
+        align-items: center;
+    }
+    .profile-dropdown {
+        position: absolute;
+        margin-top: 50px;
+        margin-left:-20px;
+    }
+    .header-content button {
+
+        font-size: 12px;
+
+
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .create-spot-button {
+        padding: 7px 10px;
+        font-size: 0.75rem;
+        width: 100%;
+        text-align: center;
+        margin-left: 10px;
+
+    }
+
+    .logo img {
+        height: 60px; /* Smallest logo for very small screens */
+        margin-top: 10px;
+    }
+
+    .auth-buttons {
+        justify-content: right;
+        gap: 5px;
+
+    }
+
+    .logout-button button {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 10px;
     }
 }
