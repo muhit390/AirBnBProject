@@ -1,0 +1,109 @@
+/* ManageSpots.css */
+.manage-spots{
+    margin-top: 150px;
+    text-align: center;
+}
+.manage-spots h1{
+    margin-bottom: 50px;
+}
+
+
+.manage-spots-page {
+    padding: 20px;
+    margin-top: 300px;
+
+  }
+
+  .no-spots {
+    text-align: center;
+  }
+
+  .spot-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .spot-tile {
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  .spot-info {
+    margin-top: 10px;
+  }
+
+  .spot-actions {
+    margin-top: 10px;
+  }
+
+  .delete-btn, .cancel-btn {
+    margin: 5px;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  /* UpdateSpotForm.css */
+  .update-spot-form {
+    padding: 20px;
+  }
+
+  .update-spot-form h1 {
+    text-align: center;
+  }
+
+  .update-spot-form form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .update-spot-form input, .update-spot-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+  }
+
+  .update-spot-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .update-spot-form button:hover {
+    background-color: #0056b3;
+  }
+
+  .no-spot-container {
+    text-align: center;
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin: 500px auto;
+  }
+  .no-spot-container p{
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }

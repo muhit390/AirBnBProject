@@ -1,0 +1,221 @@
+/* Navigation Bar */
+
+ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+li {
+    padding: 10px;
+}
+
+
+/* Profile Dropdown Menu */
+
+.profile-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 0px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    padding: 10px;
+    display: block;
+    color: #5e5e5e;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.profile-dropdown.hidden {
+    display: none;
+}
+
+.clickable-item {
+    cursor: pointer;
+    padding: 15px 30px;
+}
+
+.clickable-item:hover {
+    background-color: #ff5a5f;
+    color: #fff;
+    transition: 0.3s;
+}
+
+
+/* Header container */
+
+.app-header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+/* Flexbox for layout */
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.header-content button {
+    padding: 10px 30px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #ccc;
+    font-size: 20px;
+}
+
+.header-content button:hover {
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Logo styles */
+
+.logo img {
+    height: 70px;
+    width: auto;
+    cursor: pointer;
+}
+
+
+/* Auth/user buttons */
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+
+}
+
+.auth-button {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.auth-button:hover {
+    color: #ff385c;
+    /* Change to your preferred hover color */
+    cursor: pointer;
+}
+
+
+/* Navigation links container */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+
+
+}
+
+
+/* Create a New Spot button */
+
+.create-spot-button {
+    background-color: #ff385c;
+    /* Airbnb's signature red */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    margin-left: 1000px;
+}
+
+
+/* Hover and active states for the button */
+
+.create-spot-button:hover {
+    background-color: #e63950;
+    /* Slightly darker on hover */
+    /* transform: translateY(-2px); */
+    /* Lifts the button slightly */
+}
+
+.create-spot-button:active {
+    transform: translateY(0);
+    /* Returns the button to original position on click */
+    background-color: #d32f45;
+    /* Darker background on active click */
+}
+
+.manage-spots-link {
+    padding: 10px;
+    margin: 5px 0;
+  }
+
+  .manage-spots-link a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .manage-spots-link a:hover {
+    color: #ff385c; /* Example hover color */
+  }
+
+
+  .logout-button {
+    padding: 10px;
+    margin: 5px 0;
+  }
+
+  .logout-button button {
+    padding: 10px 20px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .logout-button button:hover {
+    background-color: #e63950;
+
+  }
+
+  .logout-button button:active {
+    background-color: #d32f45;
+    transform: translateY(1px);
+  }
+
+
+
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 10px;
+    }
+    .auth-buttons {
+        gap: 10px;
+    }
+    .logo img {
+        height: 40px;
+    }
+}

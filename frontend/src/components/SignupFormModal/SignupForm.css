@@ -1,0 +1,107 @@
+/* Main container for the signup form */
+.signup-form-container {
+    max-width: 600px;
+    width: 1000px; /* Increased the width */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form title */
+.signup-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form group for each input */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label styling */
+.signup-form-container label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Input fields */
+.signup-form-container input {
+    width: 100%;
+    padding: 12px; /* Slightly increased padding for larger width */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Input focus style */
+.signup-form-container input:focus {
+    border-color: #ff385c;
+    outline: none;
+}
+
+/* Error message styling */
+.error {
+    background-color: #ffe0e0;
+    border: 1px solid #ff8a8a;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 5px;
+    color: #d8000c;
+    font-size: 0.9rem;
+}
+
+/* Submit button */
+.signup-submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and active states for the submit button */
+.signup-submit-btn:hover {
+    background-color: #e63950;
+}
+
+.signup-submit-btn:active {
+    background-color: #d32f45;
+    transform: translateY(1px);
+}
+
+/* Disable button styling */
+.signup-submit-btn[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signup-form-container {
+        max-width: 90%; /* Ensures responsiveness on smaller screens */
+        padding: 15px;
+    }
+    .signup-title {
+        font-size: 1.8rem;
+    }
+    .signup-form-container input {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    .signup-submit-btn {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}

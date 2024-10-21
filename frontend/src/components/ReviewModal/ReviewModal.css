@@ -1,0 +1,152 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+  }
+
+  .errors {
+    color: red;
+    list-style: none;
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  button:hover{
+    background-color: #e63950
+  }
+
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .close-modal {
+    background-color: red;
+  }
+
+  .close-modal:hover {
+    background-color: #e63950;
+  }
+
+
+  /* Review Modal Container */
+.review-modal {
+  max-width: 600px;
+  width: 500px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Modal Header */
+.review-modal h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Form Elements */
+.review-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+.review-modal label {
+  font-size: 1rem;
+  color: #555;
+}
+
+.review-modal input[type="text"],
+.review-modal textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.review-modal textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Error Messages */
+.error-message {
+  color: #d8000c;
+  background-color: #ffe0e0;
+  border: 1px solid #ff8a8a;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Submit Button */
+.review-modal .submit-review-btn {
+  padding: 12px;
+  background-color: #ff385c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-modal .submit-review-btn:hover {
+  background-color: #e63950;
+}
+
+.review-modal .submit-review-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Close Button */
+.review-modal .close-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.review-modal .close-modal-btn:hover {
+  color: #ff385c;
+}

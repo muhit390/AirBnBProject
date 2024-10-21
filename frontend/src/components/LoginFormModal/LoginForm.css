@@ -1,0 +1,148 @@
+/* Main container for the login form */
+
+.login-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+/* Form title */
+
+.login-form-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+
+/* Label styling */
+
+.login-form-container label {
+    display: block;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+
+/* Input fields */
+
+.login-form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+
+/* Input focus style */
+
+.login-form-container input:focus {
+    border-color: #ff385c;
+    /* Airbnb's signature color */
+    outline: none;
+}
+
+
+/* Error message styling */
+
+.error {
+    background-color: #ffe0e0;
+    border: 1px solid #ff8a8a;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    color: #d8000c;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+
+/* Submit button */
+
+.login-form-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+/* Hover and active states for the submit button */
+
+.login-form-container button[type="submit"]:hover {
+    background-color: #e63950;
+}
+
+.login-form-container button[type="submit"]:active {
+    background-color: #d32f45;
+    transform: translateY(1px);
+}
+
+
+/* Disable button styling */
+
+.login-form-container button[disabled] {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+/* Demo User login button */
+
+.login-form-container button:not([type="submit"]) {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-form-container button:not([type="submit"]):hover {
+    background-color: #357abd;
+}
+
+.login-form-container button:not([type="submit"]):active {
+    background-color: #2a5e8d;
+    transform: translateY(1px);
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .login-form-container {
+        padding: 15px;
+    }
+    .login-form-container h1 {
+        font-size: 1.8rem;
+    }
+    .login-form-container input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+    .login-form-container button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
